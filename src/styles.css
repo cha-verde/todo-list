@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.nav{
+    height: 10vh;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 10px;
+}
+
+.sidebar{
+    display: grid;
+    gap: 20px;
+}
+
+.days-sidebar{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: aqua;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#todo-form{
+    display: grid;
+}
+
+.main-window{
+    display: grid;
+    grid-template-columns:  repeat( auto-fit, 300px );
+    gap: 10px;
+
+
+}
+
+.todo-single{
+    background-color: aqua;
+}
+
+.projects-container{
+    display: grid;
+}
