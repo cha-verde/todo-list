@@ -1,5 +1,7 @@
+import { daysInWeek } from "date-fns/constants";
+import { is } from "date-fns/locale";
 
-const { isToday, add, isBefore } = require("date-fns");
+const { isToday, add, isBefore, isAfter, sub } = require("date-fns");
 
 
 function filterTodoByDays(filter, todos){
@@ -14,7 +16,7 @@ function filterTodoByDays(filter, todos){
             weeks: 1
         })
 
-        filtered = todos.filter(item => isBefore(item.date, nextWeekDate));
+        filtered = todos.filter(item => isBefore(item.date, nextWeekDate) && isAfter(item.date, sub(new Date(), {days: 1})));
     }
 
     return filtered;

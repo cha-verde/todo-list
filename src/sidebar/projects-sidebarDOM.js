@@ -20,7 +20,7 @@ container.appendChild(projectsSidebarTitle)
 container.appendChild(addButton)
 container.appendChild(projectFormWindow)
 
-let projects = [];
+let projects = ["Unassigned"];
 
 function getProjects(){
     for(var todo of getTodos().getParsedTodos()){

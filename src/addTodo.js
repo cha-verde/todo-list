@@ -5,10 +5,7 @@ function addTodo(id){
 
   const fields = document.querySelectorAll(".todo-field");
 
-    if(localStorage.getItem(id) != null){
-      localStorage.removeItem(id)
-    }
-    else{
+    if(localStorage.getItem(id) == null){
       id = Math.floor(Math.random() * 100000)
     }
 

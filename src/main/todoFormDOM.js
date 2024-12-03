@@ -23,6 +23,10 @@ for (var i of fields) {
 function createTodoElement(name, value) {
 
     closeButton.addEventListener("click", () => {
+        const title = todoForm.querySelector("#title")
+        const description = todoForm.querySelector("#description")
+        title.value = ""
+        description.value = ""
         todoFormWindow.close();
     });
 
@@ -87,14 +91,13 @@ todoFormWindow.appendChild(addButton);
 
 todoFormWindow.appendChild(todoForm);
 
-let currentId = "";
-
 addButton.addEventListener("click", () => {
-    addTodo(currentId)
+
+    addTodo(todoForm.id)
     const todos = getTodos().getParsedTodos()
     refreshDOM(todos)
     todoFormWindow.close();
-    currentId = "";
+    todoForm.id = ''
 
 });
 
@@ -112,9 +115,6 @@ function updateProjectsDOM(todos) {
     select.setAttribute("class", "todo-field");
 
     const opt = document.createElement("option")
-    opt.setAttribute("value", "None");
-    opt.textContent = "None"
-    select.appendChild(opt);
 
     console.log(todos)
 
@@ -132,15 +132,11 @@ function updateProjectsDOM(todos) {
 
 function updateValueDOM(id){
     const todo = getTodos().getOneTodo(id);
+    todoForm.setAttribute("id", id)
     const title = todoForm.querySelector("#title")
     const description = todoForm.querySelector("#description")
-
-    console.log(todo.title)
-    console.log(todo.description)
-
     title.value = todo.title
     description.value = todo.description
-    currentId = id
 
 }
 

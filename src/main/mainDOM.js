@@ -1,5 +1,6 @@
 import { todoFormWindow } from "./todoFormDOM";
 import { updateValueDOM } from "./todoFormDOM";
+import { getTodos } from "../getTodos";
 
 const mainWindow = document.createElement("div");
 mainWindow.setAttribute("class", "main-window");
@@ -42,12 +43,26 @@ function refreshDOM(todos){
             updateValueDOM(event.target.value)
         });
 
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete"
+        deleteButton.setAttribute("value", todo.id)
+
+        deleteButton.addEventListener("click", (event) => {
+            removeTodo(event.target.value)
+        });
 
         todoDOM.appendChild(editButton)
+        todoDOM.appendChild(deleteButton)
+
 
         mainWindow.appendChild(todoDOM);
         
     }
+}
+
+function removeTodo(id){
+    localStorage.removeItem(id)
+    refreshDOM(getTodos().getParsedTodos())
 }
 
 export {mainWindow, refreshDOM}
