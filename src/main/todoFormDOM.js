@@ -126,14 +126,19 @@ todoFormWindow.appendChild(todoFormArea)
 
 
 
-addButton.addEventListener("submit", (event) => {
-    event.preventDefault();
-    addTodo(todoForm.id)
-    const todos = getTodos().getParsedTodos()
-    refreshDOM(todos)
-    todoFormWindow.close();
-    todoForm.id = ''
+addButton.addEventListener("click", (event) => {
+    const title = todoForm.querySelector("#title")
+    const date = todoForm.querySelector("#date")
 
+    if(title.validity.valid && date.validity.valid){
+        addTodo(todoForm.id)
+        const todos = getTodos().getParsedTodos()
+        refreshDOM(todos)
+        todoFormWindow.close();
+        todoForm.id = ''
+        
+    }
+  
 });
 
 function updateProjectsDOM(todos) {

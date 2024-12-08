@@ -81,7 +81,6 @@ function refreshDOM(todos){
         const date = document.createElement("div");
         const project = document.createElement("div");
 
-
         title.textContent = todo.title;
         description.textContent = todo.description;
         date.textContent = format(todo.date, "do MMMM");
@@ -91,6 +90,16 @@ function refreshDOM(todos){
         singleArea.appendChild(description);
         singleArea.appendChild(date);
         // singleArea.appendChild(project);
+        console.log(todo.priority)
+        switch(todo.priority){
+            case "low":
+                singleTab.setAttribute("class", "todo-project-low");
+            case "medium":
+                singleTab.setAttribute("class", "todo-project-medium");
+            case "high":
+                singleTab.setAttribute("class", "todo-project-high");
+
+        }
 
         allTodosSection.appendChild(todoDOM);
         

@@ -96,8 +96,18 @@ dialog{
     gap: 15px;
 }
 
-.form-tab, .todo-single-tab{
+.form-tab{
     background-color: rgb(227, 227, 227);
+}
+
+.todo-project-low{
+    background-color: rgb(189, 252, 189);
+}
+.todo-project-medium{
+    background-color: rgb(255, 255, 202);
+
+}.todo-project-high{
+    background-color: rgb(255, 172, 172);
 }
 
 .form-close-button, .todo-delete-button, .todo-edit-button{
