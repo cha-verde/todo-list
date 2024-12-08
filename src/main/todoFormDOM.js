@@ -65,9 +65,9 @@ function createTodoElement(name, value) {
         case "title":
             input.setAttribute("type", "text");
             input.setAttribute("name", name);
-            input.required = true;
             input.setAttribute("id", name);
             input.setAttribute("class", "todo-field");
+            input.required = true;
             todoForm.appendChild(input);
             break;
         case "description":
@@ -89,7 +89,6 @@ function createTodoElement(name, value) {
         case "priority":
             select.setAttribute("name", name);
             select.setAttribute("id", name);
-            select.required = true;
             select.setAttribute("class", "todo-field");
             const low = document.createElement("option")
             low.setAttribute("value", "low");
@@ -120,17 +119,15 @@ addButton.textContent = "Update";
 
 addButton.setAttribute("class", "form-add-button");
 
-
 todoFormArea.appendChild(todoForm);
-todoFormArea.appendChild(addButton);
 
 
 todoFormWindow.appendChild(todoFormArea)
 
 
 
-addButton.addEventListener("click", () => {
-
+addButton.addEventListener("submit", (event) => {
+    event.preventDefault();
     addTodo(todoForm.id)
     const todos = getTodos().getParsedTodos()
     refreshDOM(todos)
@@ -151,7 +148,6 @@ function updateProjectsDOM(todos) {
     select.setAttribute("name", "project");
     select.setAttribute("id", "project");
     select.setAttribute("class", "todo-field");
-    select.required = true;
 
 
     const opt = document.createElement("option")
@@ -167,8 +163,10 @@ function updateProjectsDOM(todos) {
     }
 
     todoForm.appendChild(select);
+todoForm.appendChild(addButton);
 
 }
+
 
 function updateValueDOM(id) {
     const todo = getTodos().getOneTodo(id);
