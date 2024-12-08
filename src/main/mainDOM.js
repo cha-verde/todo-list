@@ -5,10 +5,23 @@ import { getTodos } from "../getTodos";
 const mainWindow = document.createElement("div");
 mainWindow.setAttribute("class", "main-window");
 
+const windowTab = document.createElement("div");
+windowTab.setAttribute("class", "window-tab");
+windowTab.textContent = "Todo App"
+
+mainWindow.appendChild(windowTab)
+
+const allTodosSection = document.createElement("div");
+allTodosSection.setAttribute("class", "all-todos-section");
+
+mainWindow.appendChild(allTodosSection)
+
+
+const { format } = require("date-fns");
 
 function refreshDOM(todos){
 
-    mainWindow.replaceChildren();
+    allTodosSection.replaceChildren();
 
     for(var todo of todos){
 
@@ -16,46 +29,70 @@ function refreshDOM(todos){
         todoDOM.setAttribute("class", "todo-single");
         todoDOM.setAttribute("id", todo.id);
 
+        const singleTab = document.createElement("div");
+        singleTab.setAttribute("class", "todo-single-tab");
+        todoDOM.appendChild(singleTab)
+        
+        const deleteButton = document.createElement("button");
+        deleteButton.setAttribute("value", todo.id)
+        deleteButton.setAttribute("class", "todo-delete-button");
+
+
+        deleteButton.addEventListener("click", (event) => {
+            removeTodo(event.currentTarget.value)
+        });
+
+        const deleteIcon = document.createElement("span")
+        deleteIcon.setAttribute("class", "material-icons")
+        deleteIcon.textContent = "delete_forever"
+
+        deleteButton.appendChild(deleteIcon)
+
+        const editButton = document.createElement("button");
+        editButton.setAttribute("value", todo.id)
+        editButton.setAttribute("class", "todo-edit-button");
+        
+        const editIcon = document.createElement("span")
+        editIcon.setAttribute("class", "material-icons")
+        editIcon.textContent = "edit_note"
+
+        editButton.appendChild(editIcon)
+
+
+        editButton.addEventListener("click", (event) => {
+            todoFormWindow.showModal();
+            console.log(event.currentTarget)
+            updateValueDOM(event.currentTarget.value)
+        });
+
+      
+        singleTab.appendChild(editButton)
+        singleTab.appendChild(deleteButton)
+
+        const singleArea = document.createElement("div");
+        singleArea.setAttribute("class", "todo-single-area");
+        todoDOM.appendChild(singleArea)
+
 
         const title = document.createElement("div");
         const description = document.createElement("div");
+        description.setAttribute("class", "todo-description");
+        
         const date = document.createElement("div");
         const project = document.createElement("div");
 
 
         title.textContent = todo.title;
         description.textContent = todo.description;
-        date.textContent = todo.date;
+        date.textContent = format(todo.date, "do MMMM");
         project.textContent = todo.project
 
-        todoDOM.appendChild(title);
-        todoDOM.appendChild(description);
-        todoDOM.appendChild(date);
-        todoDOM.appendChild(project);
+        singleArea.appendChild(title);
+        singleArea.appendChild(description);
+        singleArea.appendChild(date);
+        // singleArea.appendChild(project);
 
-        const editButton = document.createElement("button");
-        editButton.textContent = "Edit"
-        editButton.setAttribute("value", todo.id)
-
-
-        editButton.addEventListener("click", (event) => {
-            todoFormWindow.showModal();
-            updateValueDOM(event.target.value)
-        });
-
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete"
-        deleteButton.setAttribute("value", todo.id)
-
-        deleteButton.addEventListener("click", (event) => {
-            removeTodo(event.target.value)
-        });
-
-        todoDOM.appendChild(editButton)
-        todoDOM.appendChild(deleteButton)
-
-
-        mainWindow.appendChild(todoDOM);
+        allTodosSection.appendChild(todoDOM);
         
     }
 }

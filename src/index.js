@@ -12,19 +12,12 @@ const container = document.querySelector(".container");
 container.appendChild(sidebar)
 container.appendChild(mainWindow);
 
+const body = document.querySelector("body");
+
+body.appendChild(todoFormWindow);
+
 const todos = getTodos().getParsedTodos();
 refreshDOM(todos)
 
 refreshProject();
 updateProjectsDOM(projects)
-
-const button = document.querySelector(".show");
-
-const body = document.querySelector("body");
-
-body.appendChild(todoFormWindow);
-
-button.addEventListener("click", () => {
-    todoFormWindow.showModal();
-});
-
